@@ -71,7 +71,7 @@ class App extends React.Component {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={"CHANGEME"}
+          value={this.state.key}
           onChange={this.handleChangeKey}
         >
           <MenuItem value={"A"}>A</MenuItem>
@@ -99,7 +99,7 @@ class App extends React.Component {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={"CHANGEME"}
+          value={this.state.type}
           onChange={this.handleChangeType}
         >
           <MenuItem value={"major"}>Major</MenuItem>
