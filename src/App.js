@@ -10,41 +10,39 @@ import Fretboard, {scaleNotes} from 'react-fretboard';
 
 
 
+class App extends React.Component {
+
+  constructor(props) {
+      super(props);
+      this.state = {
+
+        key: "C",
+        type: "major"
+      }
 
 
-function App() {
+    }
+  
+
 
   
 
-  const useStyles = makeStyles(theme => ({
-  formControl: {
-    marginTop: "30px",
-    margin: theme.spacing(1),
-    minWidth: 120,
-    background: '#FFFFFF',
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
 
-  }));
-
-  const classes = useStyles();
-  const [age, setAge] = React.useState('');
-
-
-  const handleChangeKey = event => {
+  handleChangeKey = event => {
     console.log(event.target.value)
     console.log("changing key")
-    setAge(event.target.value);
+    this.setState({key: event.target.value })
   };
 
-  const handleChangeType = event => {
+  handleChangeType = event => {
     console.log(event.target.value)
     console.log("changing type")
 
-    setAge(event.target.value);
+    this.setState({type: event.target.value })
   };
+
+  render = () => {
+
 
   return (
     <div className="App">
@@ -54,60 +52,69 @@ function App() {
           <h1> <u> Guitar Scales </u> </h1>
         </div>
     
-    <div style={{width: "900px"}}>
+    <div style={{ width: '45%', height: '100%'}}>
       <Fretboard
         nrOfFrets={18}
-        style={{background: "#999999"}}
+        
         showNotes={true}
-        selectedNotes={scaleNotes('C', 'minor')}
+        selectedNotes={scaleNotes(this.state.key, this.state.type)}
         theme={{ statusMap: { selected: 'blue' }, background: "#111111"}}
       />
     </div>
 
-      <span>
+      <span style={{margin: '20px'}}>
+
+      <span style={{margin: '20px'}}>
       
-      <FormControl className={classes.formControl}>
+      <FormControl style={{background: '#FFFFFF', width: '75px'}}>
         <InputLabel id="demo-simple-select-label">Key</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
-          style={{useStyles}}
-          onChange={handleChangeKey}
+          value={"CHANGEME"}
+          onChange={this.handleChangeKey}
         >
           <MenuItem value={"A"}>A</MenuItem>
           <MenuItem value={"A#"}>A#/Bb</MenuItem>
           <MenuItem value={"B"}>B</MenuItem>
-          <MenuItem value={10}>C</MenuItem>
-          <MenuItem value={20}>C#/Db</MenuItem>
-          <MenuItem value={30}>E</MenuItem>
-          <MenuItem value={10}>F</MenuItem>
-          <MenuItem value={20}>F#/Gb</MenuItem>
-          <MenuItem value={30}>G</MenuItem>
-          <MenuItem value={20}>G#/Ab</MenuItem>
+          <MenuItem value={"C"}>C</MenuItem>
+          <MenuItem value={"C#"}>C#/Db</MenuItem>
+          <MenuItem value={"E"}>E</MenuItem>
+          <MenuItem value={"F"}>F</MenuItem>
+          <MenuItem value={"F#"}>F#/Gb</MenuItem>
+          <MenuItem value={"G"}>G</MenuItem>
+          <MenuItem value={"G#"}>G#/Ab</MenuItem>
         </Select>
       </FormControl>
+
+      </span>
+
+      <span style={{margin: '20px'}}>
+
+      
       
     
-      <FormControl className={classes.formControl}>
+      <FormControl style={{background: '#FFFFFF', width: '75px'}}>
         <InputLabel id="demo-simple-select-label">Scale</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
-          onChange={handleChangeType}
+          value={"CHANGEME"}
+          onChange={this.handleChangeType}
         >
           <MenuItem value={"major"}>Major</MenuItem>
           <MenuItem value={"minor"}>Minor</MenuItem>
         </Select>
       </FormControl>
 
+      </span>
     </span>
 
         
       </header>
     </div>
   );
+}
 }
 
 export default App;
