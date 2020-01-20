@@ -1,14 +1,12 @@
 
-import React from 'react';
-import logo from './logo.svg';  
+import React from 'react';  
 import './App.css';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Fretboard, { chordNotes, scaleNotes, intervalNotes } from 'react-fretboard';
+import Fretboard, {scaleNotes} from 'react-fretboard';
 
 
 
@@ -16,7 +14,7 @@ import Fretboard, { chordNotes, scaleNotes, intervalNotes } from 'react-fretboar
 
 function App() {
 
-  let imgUrl = './tiedye.jpg'
+  
 
   const useStyles = makeStyles(theme => ({
   formControl: {
@@ -34,20 +32,24 @@ function App() {
   const classes = useStyles();
   const [age, setAge] = React.useState('');
 
-  const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
-  React.useEffect(() => {
-    
-  }, []);
 
-  const handleChange = event => {
+  const handleChangeKey = event => {
     console.log(event.target.value)
-    //setAge(event.target.value);
+    console.log("changing key")
+    setAge(event.target.value);
+  };
+
+  const handleChangeType = event => {
+    console.log(event.target.value)
+    console.log("changing type")
+
+    setAge(event.target.value);
   };
 
   return (
     <div className="App">
       <header className="App-header">
+
         <div>
           <h1> <u> Guitar Scales </u> </h1>
         </div>
@@ -55,10 +57,10 @@ function App() {
     <div style={{width: "900px"}}>
       <Fretboard
         nrOfFrets={18}
-        selectedNotes={['C']}
         style={{background: "#999999"}}
         showNotes={true}
-        theme={{ statusMap: { selected: '#b9e59e' }, background: "#111111"}}
+        selectedNotes={scaleNotes('C', 'minor')}
+        theme={{ statusMap: { selected: 'blue' }, background: "#111111"}}
       />
     </div>
 
@@ -71,11 +73,11 @@ function App() {
           id="demo-simple-select"
           value={age}
           style={{useStyles}}
-          onChange={handleChange}
+          onChange={handleChangeKey}
         >
           <MenuItem value={"A"}>A</MenuItem>
-          <MenuItem value={20}>A#/Bb</MenuItem>
-          <MenuItem value={30}>B</MenuItem>
+          <MenuItem value={"A#"}>A#/Bb</MenuItem>
+          <MenuItem value={"B"}>B</MenuItem>
           <MenuItem value={10}>C</MenuItem>
           <MenuItem value={20}>C#/Db</MenuItem>
           <MenuItem value={30}>E</MenuItem>
@@ -93,11 +95,10 @@ function App() {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={age}
-          onChange={handleChange}
+          onChange={handleChangeType}
         >
-          <MenuItem value={10}>Major</MenuItem>
-          <MenuItem value={20}>Minor</MenuItem>
-          <MenuItem value={30}>Minor penatonic</MenuItem>
+          <MenuItem value={"major"}>Major</MenuItem>
+          <MenuItem value={"minor"}>Minor</MenuItem>
         </Select>
       </FormControl>
 
